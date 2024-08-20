@@ -1,0 +1,93 @@
+﻿@model IEnumerable<Website_TD.Models.DonHang>
+@{
+    ViewBag.Title = "XemDonHang";
+    Layout = "~/Shared/Layout.cshtml";
+}
+
+<h2>Xem Đơn Hàng</h2>
+
+<style>
+
+
+
+    .badge {
+        font-size: 0.85rem; /* Adjust badge font size */
+    }
+
+    .badge-warning, .badge-success, .badge-danger, .badge-info {
+        color: #fff; /* Light text color for badge texts */
+    }
+
+    .badge-warning {
+        background-color: #f0ad4e; /* Bootstrap's default warning color */
+    }
+
+    .badge-success {
+        background-color: #5cb85c; /* Bootstrap's default success color */
+    }
+
+    .badge-danger {
+        background-color: #d9534f; /* Bootstrap's default danger color */
+    }
+
+    .badge-info {
+        background-color: #5bc0de; /* Bootstrap's default info color */
+    }
+</style>
+<div class="container">
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>Mã Đơn Hàng</th>
+                <th>Mã Tài Khoản</th>
+                <th>Ngày Đặt</th>
+                <th>Phương Thức Thanh Toán</th>
+                <th>Tình Trạng</th>
+                <th>Địa chỉ nhận hàng</th>
+                <th>Chi Tiết</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var donHang in Model)
+            {
+                <tr>
+                    <td>@donHang.MaDonHang</td>
+                    <td>@donHang.MaTaiKhoan</td>
+                    <td>@donHang.NgayDatHang.ToString("dd/MM/yyyy")</td>
+                    @if (donHang.ThanhToan == 1)
+                    {
+                        <td><span class="badge badge-danger">Thanh toán tiền mặt</span></td>
+                    }
+                    @if (donHang.ThanhToan == 2)
+                    {
+                        <td><span class="badge badge-info">Thanh toán chuyển khoản</span></td>
+                    }
+                    @if (donHang.TinhTrang == 1)
+                    {
+                        <td><span class="badge badge-warning">Đang chờ xác nhận</span></td>
+                    }
+                    @if (donHang.TinhTrang == 0)
+                    {
+                        <td><span class="badge badge-warning">Đã xác nhận</span></td>
+                    }
+                    <td>@Html.DisplayFor(modelItem => donHang.TaiKhoan.DiaChi)</td>
+                    <td>
+                        @Html.ActionLink("Xem Chi Tiết", "ChiTietDonHang", new { id = donHang.MaDonHang })
+                        @*<a href="@Url.Action("ChiTietDonHang", "Admin", new { id = donHang.MaDonHang })" class="btn btn-info">Chi tiết</a>*@
+                    </td>
+                    <td>
+                        @if (donHang.TinhTrang == 1)
+                        {
+                            using (Html.BeginForm("CapNhatTinhTrang", "Admin", FormMethod.Post))
+                            {
+                                @Html.Hidden("id", donHang.MaDonHang)
+                                <button type="submit" class="btn btn-primary">Xác Nhận</button>
+                            }
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+

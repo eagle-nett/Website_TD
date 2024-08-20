@@ -1,0 +1,294 @@
+﻿<!DOCTYPE html>
+
+<html lang="vi-VN">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="~/Content/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="~/Content/limited.css" />
+    <link rel="stylesheet" type="text/css" href="~/Content/Style.css" />
+    <link rel="stylesheet" type="text/css" href="~/Content/7.css" />
+    <link rel="stylesheet" type="text/css" href="~/Content/login.css" />
+    <link rel="stylesheet" type="text/css" href="~/Content/a1.css" />
+    <link rel="stylesheet" type="text/css" href="~/Content/a3.css" />
+
+    <title></title>
+    <script type="text/javascript" src="~/Scripts/bootstrap.js"></script>
+    <script type="text/javascript" src="~/Scripts/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+    @{ var admin = Session["Admin"] as Website_TD.Models.TaiKhoan; }
+    @{ var user = Session["User"] as Website_TD.Models.TaiKhoan; }
+    @{ var u = Session["use"] as Website_TD.Models.TaiKhoan; }
+    <div id="header">
+        <nav class="navbar navbar-expand-sm bg-light navbar-light">
+            <div class="container-fluid">
+
+                <header>
+                    <div id="logo">
+                        <a href="/Home/Index">
+                            <img src="~/img/logoweb (1).png" alt="Logo Web">
+                            </a>
+                    </div>
+                </header>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="mynavbar">
+                    <ul class="navbar-nav me-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Home/Index">TRANG CHỦ</a>
+
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">THỜI TRANG </a>
+                            <ul class="dropdown-menu" id="drop">
+                                <li class="dropdown-header">Menu</li>
+                                <li><a class="dropdown-item" href="/DanhSachSp/Ao">Áo</a></li>
+                                <li><a class="dropdown-item" href="/DanhSachSp/Quan">Quần</a></li>
+                                <li><a class="dropdown-item" href="/DanhSachSp/Giay">Giày</a></li>
+                                <li><a class="dropdown-item" href="/DanhSachSp/PhuKien">Trang Sức</a></li>
+                                <li><a class="dropdown-item" href="/DanhSachSp/DongHo">Đồng Hồ</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">SẢN PHẨM CAO CẤP</a>
+                            <ul class="dropdown-menu" id="drop">
+                                <li class="dropdown-header">Menu</li>
+                                <li><a class="dropdown-item" href="/DanhSachSp/Best">Best Seller</a></li>
+                                <li><a class="dropdown-item" href="/DanhSachSp/Limited">Limited</a></li>
+                                <li><a class="dropdown-item" href="/DanhSachSp/Luxury">Luxury</a></li>
+                            </ul>
+                        </li>
+
+                        @{ if (admin == null)
+                            {
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">LIÊN HỆ</a>
+                                    <ul class="dropdown-menu" id="drop">
+                                        <li><a class="dropdown-item" href="https://www.facebook.com/ihatetndat/">Facebook</a></li>
+                                        <li><a class="dropdown-item" href="https://www.instagram.com/ist_endat/">Instagram</a></li>
+                                        <li><a class="dropdown-item" href="https://www.youtube.com/watch?v=r9lKchjaSSQ">Youtube</a></li>
+                                        <li><a class="dropdown-item" href="mailto:tiendat176mt@gmail.com">Email</a></li>
+
+                                    </ul>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/Home/Gioithieu">GIỚI THIỆU</a>
+                                </li>
+                            }
+                        }
+                        @*<li class="nav-item">
+                            <a class="nav-link" href="/Home/Gioithieu">GIỚI THIỆU</a>
+                        </li>*@
+
+
+
+
+                        @{if (admin != null)
+                            {
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">QUẢN LÝ</a>
+                                    <ul class="dropdown-menu" id="drop">
+                                        <li><a class="dropdown-item" href="/Admin/Index">Thêm sản phẩm</a></li>
+                                        <li><a class="dropdown-item" href="/Admin/XoaSp">Xóa sản phẩm</a></li>
+                                        <li><a class="dropdown-item" href="/Admin/SuaSp">Sửa sản phẩm</a></li>
+                                        <li><a class="dropdown-item" href="/Admin/XemDonHang">Xem đơn hàng</a></li>
+                                        <li><a class="dropdown-item" href="/Admin/XemPhanHoi">Xem phản hồi</a></li>
+                                    </ul>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/Account/ThongTinNguoiDung/@admin.MaTaiKhoan">Welcome: @admin.HoTen</a>
+                                </li>
+
+
+                                <li class="nav-item" style="padding-left:30px">
+                                    <a class="nav-link" href="/Account/DangXuat">Đăng xuất</a>
+                                </li>
+                            }
+
+                        }
+
+                        @*@if (admin == null)
+        {
+            <li class="nav-item" style="padding-left:30px">
+                <a class="nav-link" href="/GioHang/GioHang">Giỏ hàng</a>
+            </li>
+
+        }*@
+
+                        @{if (user != null)
+                            {
+
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/Account/ThongTinNguoiDung/@user.MaTaiKhoan">Welcome: @user.HoTen</a>
+                                </li>
+
+                                <li class="nav-item" style="padding-left:30px">
+                                    <a class="nav-link" href="/Account/DangXuat">Đăng xuất</a>
+                                </li>
+                            }
+
+                        }
+
+                    </ul>
+
+                    @RenderSection("search", required: false)
+                    @RenderSection("LogIn", required: false)
+
+                    <a href="/GioHang/GioHang" class="btn btn-custom py-2 px-4 rounded-pill d-inline-flex align-items-center me-2 position-relative">
+                        <i class="fas fa-shopping-cart icon-white"></i>
+                        <span class="d-lg-none ms-2">Cart</span>
+                    </a>
+
+
+
+                </div>
+
+
+
+            </div>
+        </nav>
+    </div>
+    <div class="container-fluid">
+        @RenderBody()
+    </div>
+
+    <div class="wrapper-animation2">
+
+        <span class="text-animation-2">
+            <h2>
+                <span>STREETWEAR BRAND LIMITED - NICE TO MEET YOU </span>
+            </h2>
+        </span>
+        @*<span class="text-animation-2">
+            <h2>
+                <span>STREETWEAR BRAND LIMITED - NICE TO MEET YOU </span>   
+            </h2>
+        </span>*@
+        @*<span class="text-animation-2">
+            <h2>
+                <span>STREETWEAR BRAND LIMITED - NICE TO MEET YOU </span>
+            </h2>
+        </span>*@
+    </div>
+
+
+
+    <div class="footer-inner padding-top-35 pb-lg-5" style="margin-top:10px;background-color:darkgray; font-family:system-ui, -apple-system, " Segoe UI", Roboto, "Helvetica Neue" , "Noto Sans" , "Liberation Sans" , Arial, sans-serif, "Apple Color Emoji" , "Segoe UI Emoji" , "Segoe UI Symbol" , "Noto Color Emoji" ">
+        <div class="container" style="padding-top:20px">
+            <div class="row">
+
+                <div id="post-footer" class=" post-footer contrast-typo hgrid-stretch linkstyle">
+                    <div class="hgrid">
+                        <div class="hgrid-span-12">
+                            <p class="credit small">
+                                © Hân hạnh được phục vụ bạn ☺| Welcome nice too meet you ©
+                            </p><!-- .credit -->
+                        </div>
+                    </div>
+                </div>
+                <div class="textwidget">
+
+                    <h2>VỀ CHÚNG TÔI</h2>
+                    <p>
+                        TODAT – HÀNH TRÌNH CHINH PHỤC PHONG VỊ MỚI<br>
+                        TODAT không ngừng theo đuổi sứ mệnh mang phong vị mới từ những vùng đất trứ danh tại Việt Nam và trên thế giới đến khách hàng.
+                    </p>
+                </div>
+
+                <div class="col-xs-12 col-sm-6 col-lg-4">
+                    <div class="footer-widget">
+                        <div class="pl-md-5 pd-custom border_left">
+                            <h2>LIÊN HỆ</h2>
+                            <ul class="contact_info list-unstyled">
+                                <li class="clearfix">
+                                    <p>
+                                        TODAT SAIGON CHILL STORE
+                                    </p>
+                                </li>
+                                <li><i class="fa fa-envelope" aria-hidden="true"></i> Email: cs@todat.vn</li>
+                                <li><i class="fa fa-map-marker" aria-hidden="true"></i> Representative Store : 19 Hùng Vương, P4, Quận 5, Thành Phố Hồ Chí Minh</li>
+                                <li><i class="fa fa-map-marker" aria-hidden="true"></i> Working Office: 140 Lê Trọng Tấn, Quận Tân Phú, Thành Phố Hồ Chí Minh</li>
+                                <li><i class="fa fa-phone" aria-hidden="true"></i>Customer Service: (+84) 3645 6341</li>
+                            </ul>
+                        </div>
+
+                        <li class="clearfix">
+                            <i class="block_icon fa fa-phone"></i>
+                            <a href="tel:0336456341">Hotline: 0336456341 </a>
+                            <p> Time: 07:00 - 21:00 (Thứ 2 - Thứ 7)</p>
+                        </li>
+                        <li class="clearfix">
+                            <i class="block_icon fa fa-envelope"></i>
+                            <a href="mailto:tiendat176mt@gmail.com">cs@todatstore.com</a>
+                        </li>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-lg-2">
+                    <div class="footer-widget">
+                        <h2 class="hastog"><span>HỖ TRỢ</span></h2>
+                        <ul class="list-menu list-blogs">
+
+                            <li><a href="/Home/Gioithieu">Thông tin giới thiệu</a></li>
+
+                            <li><a href="/Account/DangNhap">Đăng Nhập</a></li>
+
+                            <li><a href="/Account/DangKy">Đăng Ký</a></li>
+
+                        </ul>
+
+
+                    </div>
+                </div>
+
+                <div class="col-xs-12 col-sm-6 col-lg-3">
+                    <div class="footer-widget">
+                        <h2 class="hastog"><span>CHÍNH SÁCH</span></h2>
+                        <ul class="list-menu list-blogs">
+
+                            <li><a href="/Home/Gioithieu">Điều khoản sử dụng</a></li>
+
+                            <li><a href="/Home/Gioithieu">Chính sách đổi trả</a></li>
+
+                            <li><a href="/Home/Gioithieu">Giải quyết tranh chấp</a></li>
+
+                            <li><a href="/Home/Gioithieu">Thương hiệu và bản quyền</a></li>
+
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-lg-3">
+                    <div class="footer-widget">
+                        <ul class="list-menu list-blogs">
+                            <h2> ĐỊA CHỈ LIÊN HỆ </h2>
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.0673478727085!2d106.62609067481847!3d10.806153889344474!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752be27d8b4f4d%3A0x92dcba2950430867!2zVHLGsOG7nW5nIMSQ4bqhaSBo4buNYyBDw7RuZyBUaMawxqFuZyBUUC4gSOG7kyBDaMOtIE1pbmggKEhVSVQp!5e0!3m2!1svi!2s!4v1722868817158!5m2!1svi!2s" @*width="600" height="450"*@ style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+                        </ul>
+
+                    </div>
+                </div>
+
+                <div id="post-footer" class=" post-footer contrast-typo hgrid-stretch linkstyle">
+                    <div class="hgrid">
+                        <div class="hgrid-span-12">
+                            <p class="credit small">
+                                ©Todat Saigon Chill 2024| All rights reserved. Website by todat.
+                            </p><!-- .credit -->
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+</body>
+</html>

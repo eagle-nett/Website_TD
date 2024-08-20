@@ -1,0 +1,47 @@
+﻿@model Website_TD.Models.DonHang
+@{
+    ViewBag.Title = "ChiTietDonHang";
+    Layout = "~/Shared/Layout.cshtml";
+}
+
+
+
+<div class="container">
+
+    <!-- Chi tiết đơn hàng -->
+    <h4>Chi Tiết Đơn Hàng</h4>
+    <div class="table-responsive mt-4">
+        <table class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>Tên Sản Phẩm</th>
+                    <th>Số Lượng</th>
+                    <th>Đơn Giá</th>
+                    <th>Thành Tiền</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.ChiTietDonHangs != null && Model.ChiTietDonHangs.Any())
+                {
+                    foreach (var item in Model.ChiTietDonHangs)
+                    {
+                        <tr>
+                            <td>@item.SanPham.TenSanPham</td>
+                            <td>@item.SoLuong</td>
+                            <td>@String.Format("{0:0,0}", item.DonGia) VNĐ</td>
+                            <td>@String.Format("{0:0,0}", item.ThanhTien) VNĐ</td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="4">Không có dữ liệu chi tiết đơn hàng.</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+

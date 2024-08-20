@@ -1,0 +1,34 @@
+﻿@model IEnumerable<Website_TD.Models.PhanHoi>
+@{
+    ViewBag.Title = "XemPhanHoi";
+    Layout = "~/Shared/Layout.cshtml";
+}
+
+<h2>Xem Đánh Giá</h2>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.FirstOrDefault().MaPhanHoi)</th>
+            <th>@Html.DisplayNameFor(model => model.FirstOrDefault().MaTaiKhoan)</th>
+            <th>@Html.DisplayNameFor(model => model.FirstOrDefault().DanhGia)</th>
+            <th>@Html.DisplayNameFor(model => model.FirstOrDefault().NhanXet)</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.MaPhanHoi</td>
+                <td>@item.MaTaiKhoan</td>
+                <td>@item.DanhGia</td>
+                <td>@item.NhanXet</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div>
+    @Html.ActionLink("Trở về", "Index", "Home")
+</div>
+

@@ -1,0 +1,62 @@
+﻿@model IEnumerable<Website_TD.Models.GioHang>
+@{
+    ViewBag.Title = "GioHang";
+    Layout = "~/Shared/Layout.cshtml";
+}
+
+<div class="container mt-4">
+    <h2 class="text-center">Giỏ hàng <i class="fa fa-shopping-cart"></i></h2>
+
+    <div class="table-responsive mt-4">
+        <table class="table table-hover table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Mã SP</th>
+                    <th scope="col">Tên SP</th>
+                    <th scope="col">Ảnh bìa</th>
+                    <th scope="col">Đơn giá</th>
+                    <th scope="col">Số lượng</th>
+                    <th scope="col">Thành tiền</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.iMasp</td>
+                        <td>@item.sTensp</td>
+                        <td><img src="@item.sAnhBia" width="100" height="100" /></td>
+                        <td>@String.Format("{0:0,0}", item.dDonGia) VNĐ</td>
+                        <td>
+                            @using (Html.BeginForm("CapNhatGioHang", "GioHang", new { @iMaSP = item.iMasp }, FormMethod.Post, new { @class = "form-inline" }))
+                            {
+                                <input type="number" name="quantity" value="@item.iSoLuong" class="form-control mr-1" step="1" min="0" max="999840" title="SL" size="4" inputmode="numeric">
+                                <br />
+                                <button type="submit" class="btn btn-success">Cập nhật</button>
+                            }
+                        </td>
+                        <td>@String.Format("{0:0,0}", item.ThanhTien) VNĐ</td>
+                        <td>
+                            @Html.ActionLink("Xóa", "XoaGioHang", new { @iMaSP = item.iMasp }, new { @class = "btn btn-danger", @style = "color:white;" })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <div class="col-sm-6 offset-3 text-center">
+        <div class="float-md-right">
+            <p class="font-weight-bold">Tổng số lượng: <span>@ViewBag.TongSoLuong</span></p>
+            <p class="font-weight-bold">Tổng thành tiền: <span>@String.Format("{0:0,0}", @ViewBag.TongTien) VNĐ</span></p>
+            @using (Html.BeginForm("ThanhToanDonHang", "GioHang", new { @class = "" }))
+            {
+                <br /> <input type="submit" value="Đặt hàng" class="btn btn-success" />
+            }
+        </div>
+    </div>
+
+</div>
+
+

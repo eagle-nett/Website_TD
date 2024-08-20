@@ -1,0 +1,111 @@
+﻿@model List<Website_TD.Models.SanPham>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Shared/Layout.cshtml";
+}
+
+@{ var admin = Session["Admin"] as Website_TD.Models.TaiKhoan; }
+@{ var user = Session["User"] as Website_TD.Models.TaiKhoan; }
+@section LogIn
+{
+    @{ if (admin == null && user == null)
+        {
+            @*<form>
+                <a href="/Account/DangNhap"><button class="btn btn-primary" type="button">Đăng Nhập</button></a>
+                <a href="/Account/DangKy"><button class="btn btn-primary" type="button">Đăng Ký</button></a>
+            </form>*@
+            <div class="nav-item dropdown">
+                <a href="#" class="btn btn-custom py-2 px-4 rounded-pill dropdown-toggle dropdown-toggle-custom d-inline-flex align-items-center" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-users icon-white"></i>
+                    <span class="d-lg-none ms-2">Account</span>
+                </a>
+                <div class="dropdown-menu bg-light" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="/Account/DangNhap">Đăng nhập</a>
+                    <a class="dropdown-item" href="/Account/DangKy">Đăng ký</a>
+                </div>
+            </div>
+        }
+    }
+
+}
+
+
+<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+
+    </div>
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img src="https://vn.louisvuitton.com/content/dam/lv/online/high-end/unisex/Fragrances/W_Fa_Fragrances_Flacon_Exception_v2.html/jcr:content/assets/masthead/header_flacons_exception_DI1.jpg?imwidth=2400" class="d-block w-100 h-25" alt="Yaw" />
+        </div>
+        <div class="carousel-item">
+            <img src="https://www.louisvuitton.com/images/is/image/lv/M_BC_Shoes_LV_Trainer_June2024_DI3.jpg?wid=1180" class="d-block w-100 h-25" alt="...">
+        </div>
+        <div class="carousel-item">
+            <img src="https://www.louisvuitton.com/images/is/image/lv/MEN_ACC_BC_LV_CLASH_01_DI3.jpg?wid=2400" class="d-block w-100 h-25" alt="...">
+        </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+
+</div>
+
+        @*@RenderSection("LogIn", required: false)*@
+
+
+
+
+    @section search
+        {
+        <form class="d-flex" id="search" action="/Home/@ViewBag.Title">
+            <input class="form-control me-2" type="search" id="search" name="search" placeholder="Search">
+            <button class="search-btn" type="submit">
+                <span>Search</span>
+            </button>
+        </form>
+    }
+    <div class="container-fluid" style="margin-top:10px">
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                <div class="col mb-5">
+                    <div class="card h-100">
+                        <a href="/Admin/Chitiet/@item.MaSanPham">
+                            <center>
+                                <img src=@Url.Content(item.HinhAnh.ToString()) class="img-responsive" alt="" width="200" height="150" />
+                            </center>
+                        </a>
+                        <div class="card-body p-4">
+                            <div class="text-center">
+                                <h5 class="fw-bolder">@item.TenSanPham</h5>
+                                Giá: @String.Format("{0:0,0}", @item.Gia) VND
+                            </div>
+                        </div>
+                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                            <div class="text-center">
+                                @using (Html.BeginForm("ThemGioHang", "GioHang", new { @iMaSP = item.MaSanPham, @strURL = Request.Url.ToString() }))
+                                {
+                                    <input type="submit" value="Thêm vào giỏ hàng" id="bgnGioHang" class="btn btn-outline-dark mt-auto" />
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+
+

@@ -1,0 +1,66 @@
+﻿@model Website_TD.Models.TaiKhoan
+
+@{
+    ViewBag.Title = "DangNhap";
+    Layout = "~/Shared/Layout.cshtml";
+}
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const passwordField = document.getElementById('passwordField');
+
+        if (passwordField) {
+            passwordField.addEventListener('input', function () {
+                let inputValue = passwordField.value;
+                passwordField.type = 'password'; // Change type to password to hide characters
+            });
+        }
+    });
+
+</script>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="container mt-5">
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="text-center">Đăng Nhập</h4>
+                        </div>
+                        <div class="card-body">
+                            @using (Html.BeginForm("Login", "Account", FormMethod.Post))
+                            {
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label" })
+                                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                                </div>
+
+                                <div class="form-group" style="margin-top:10px">
+                                    @Html.LabelFor(model => model.MatKhau, htmlAttributes: new { @class = "control-label" })
+                                    @Html.EditorFor(model => model.MatKhau, new { htmlAttributes = new { @class = "form-control", id = "passwordField" } })
+                                    @Html.ValidationMessageFor(model => model.MatKhau, "", new { @class = "text-danger" })
+                                </div>
+
+                                <div class="form-group" style="margin-top:10px">
+                                    <div class="col-md-offset-2 col-md-10">
+                                        <input type="submit" value="Đăng Nhập" class="btn btn-default" />
+                                    </div>
+                                </div>
+                                <h4>@ViewBag.DangNhapSai</h4>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+}

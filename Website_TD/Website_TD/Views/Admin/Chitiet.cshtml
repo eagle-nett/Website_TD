@@ -1,0 +1,32 @@
+﻿@model Website_TD.Models.SanPham
+@{
+    ViewBag.Title = "Chitiet";
+    Layout = "~/Shared/Layout.cshtml";
+}
+
+<section class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-5 mb-4">
+                <img class="img-fluid rounded" src="@Url.Content(Model.HinhAnh)" alt="@Model.TenSanPham" style="max-width: 100%; height: auto;" />
+            </div>
+            <div class="col-lg-7">
+
+                <h1 class="display-5 fw-bold">@Model.TenSanPham</h1>
+                <div class="fs-5 mb-4">
+                    <span class="text-muted">Giá:</span> @String.Format("{0:0,0}", @Model.Gia) VNĐ
+                </div>
+                <p class="lead"><h3>Mô tả: </h3>@Model.MoTa</p><br>
+                <div class="d-flex">
+                    @using (Html.BeginForm("ThemGioHang", "GioHang", new { iMaSP = Model.MaSanPham, strURL = Request.Url.ToString() }))
+                    {
+                        <button type="submit" class="btn btn-outline-dark me-3">
+                            <i class="bi-cart-fill me-1"></i>Thêm vào giỏ hàng
+                        </button>
+                    }
+                    <a href="@Url.Action("Index", "Home")" class="btn btn-outline-dark">Mua tiếp</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,283 @@
+﻿:root {
+    --bs-primary: #d4a762 !important;
+}
+
+/*** Spinner Start ***/
+#spinner {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity .8s ease-out, visibility 0s linear .5s;
+    z-index: 99999;
+}
+
+    #spinner.show {
+        transition: opacity .8s ease-out, visibility 0s linear .0s;
+        visibility: visible;
+        opacity: 1;
+    }
+/*** Spinner End ***/
+
+
+
+
+/*** Navbar Start ***/
+.nav-bar {
+    background: linear-gradient(to bottom, #FFBF66, #FFFCCE);
+    border-bottom: 1px solid rgba(0, 0, 0, .05);
+}
+
+.navbar .navbar-nav .nav-link {
+    padding: 10px 12px;
+    font-weight: 600;
+    font-size: 17px;
+    transition: .5s;
+}
+
+    .navbar .navbar-nav .nav-link:hover,
+    .navbar .navbar-nav .nav-link.active {
+        color: var(--bs-primary);
+    }
+
+.navbar .dropdown-toggle::after {
+    border: none;
+    content: "\f107";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 700;
+    vertical-align: middle;
+    margin-left: 8px;
+}
+
+@media (min-width: 1200px) {
+    .navbar .nav-item .dropdown-menu {
+        display: block;
+        visibility: hidden;
+        top: 100%;
+        transform: rotateX(-75deg);
+        transform-origin: 0% 0%;
+        transition: .5s;
+        opacity: 0;
+    }
+
+    .navbar .nav-item:hover .dropdown-menu {
+        transform: rotateX(0deg);
+        visibility: visible;
+        opacity: 1;
+    }
+}
+
+.navbar-nav.ms-auto {
+    display: flex;
+    align-items: center; /* Căn giữa các nút theo chiều dọc */
+    gap: 10px; /* Khoảng cách giữa các nút */
+}
+
+.text-primary {
+    color: var(--bs-primary) !important;
+}
+
+.text-chocolate {
+    color: #8b7355; /* Màu socola */
+}
+
+.btn-custom {
+    background-color: #d4a762;
+    border: none; /* Loại bỏ viền nếu cần */
+}
+
+    .btn-custom:hover {
+        background-color: #8b7355; /* Màu khi hover, tùy chỉnh theo ý muốn */
+    }
+
+.icon-white {
+    color: #ffffff; /* Màu trắng cho biểu tượng */
+    transition: color 0.3s;
+}
+
+    .icon-white:hover,
+    .icon-white:active {
+        color: #000000; /* Màu đen khi hover hoặc click */
+    }
+
+.dropdown-toggle-custom {
+    color: #ffffff; /* Màu trắng cho biểu tượng */
+}
+
+.dropdown .dropdown-menu a:hover {
+    background: var(--bs-primary);
+    color: var(--bs-white);
+}
+
+#searchModal .modal-content {
+    background-color: rgba(255, 255, 255, .95);
+}
+
+
+
+/*** Navbar End ***/
+
+/*** Search Start ***/
+.search {
+    position: relative;
+    background: linear-gradient(135deg, rgb(191, 109, 76) 0%, rgba(248, 202, 166, 0.94) 100%);
+    border-radius: 50px;
+    padding: 10px;
+    display: flex; /* Sử dụng flex để căn giữa nội dung */
+    align-items: center;
+    z-index: 0;
+    height: 50px;
+    margin: 0 10px;
+}
+
+.search-container {
+    position: relative;
+    width: 100%;
+    border-radius: 50px;
+    background: linear-gradient(135deg, rgb(246, 246, 246) 0%, rgb(214, 229, 247) 100%);
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    height: 40px;
+}
+
+    .search-container::after, .search-container::before {
+        content: "";
+        width: 100%;
+        border-radius: inherit;
+        position: absolute;
+    }
+
+    .search-container::before {
+        top: -1px;
+        left: -1px;
+        background: linear-gradient(0deg, rgb(218, 232, 247) 0%, rgb(255, 255, 255) 100%);
+        z-index: -1;
+    }
+
+    .search-container::after {
+        bottom: -1px;
+        right: -1px;
+        background: linear-gradient(0deg, rgb(246, 246, 246) 0%, rgb(211, 232, 255) 100%);
+        box-shadow: rgba(79, 156, 232, 0.7019607843) 3px 3px 5px 0px, rgba(79, 156, 232, 0.7019607843) 5px 5px 20px 0px;
+        z-index: -2;
+    }
+
+.search-input {
+    padding: 10px;
+    width: 100%;
+    background: linear-gradient(135deg, rgb(249, 249, 249) 0%, rgb(214, 229, 247) 100%);
+    border: none;
+    color: #050505;
+    font-size: 16px;
+    border-radius: 50px;
+    height: 40px;
+}
+
+    .search-input:focus {
+        outline: none;
+        background: linear-gradient(135deg, rgb(239, 247, 255) 0%, rgb(214, 229, 247) 100%);
+    }
+
+.search__icon {
+    width: 35px;
+    aspect-ratio: 1;
+    border-left: 2px solid rgb(248, 145, 145);
+    border-top: 3px solid transparent;
+    border-bottom: 3px solid transparent;
+    border-radius: 50%;
+    padding-left: 12px;
+    margin-right: 10px;
+}
+
+    .search__icon:hover {
+        border-left: 3px solid rgb(246, 47, 47);
+    }
+
+    .search__icon path {
+        fill: rgb(248, 145, 145);
+    }
+
+
+/*** Search End ***/
+
+/*** Button Start ***/
+.btn-custom {
+    background-color: #d4a762;
+    border: none;
+    color: #ffffff; /* Đảm bảo văn bản trong nút có màu trắng */
+    height: 40px;
+}
+
+    .btn-custom:hover {
+        background-color: #8b7355;
+    }
+/*** Button End ***/
+
+
+
+
+
+/*** Footer Start ***/
+
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+.container-fluid.footer {
+    margin-top: auto;
+    background: #FFFCCE;
+}
+
+.footer .footer-item a.text-body:hover {
+    color: var(--bs-primary) !important;
+}
+
+.parent {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.child {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform-style: preserve-3d;
+    transition: all 0.5s ease-in-out;
+    border-radius: 50%;
+    margin: 0 5px;
+}
+
+    .child:hover {
+        background-color: white;
+        background-position: -100px 100px, -100px 100px;
+        transform: rotate3d(0.5, 1, 0, 30deg);
+        transform: perspective(180px) rotateX(60deg) translateY(2px);
+        box-shadow: 0px 10px 10px rgb(1, 49, 182);
+    }
+
+.button {
+    border: none;
+    background-color: transparent;
+    font-size: 20px;
+}
+
+    .button:hover {
+        width: inherit;
+        height: inherit;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transform: translate3d(0px, 0px, 15px) perspective(180px) rotateX(-35deg) translateY(2px);
+        border-radius: 50%;
+    }
+/*** Footer End ***/

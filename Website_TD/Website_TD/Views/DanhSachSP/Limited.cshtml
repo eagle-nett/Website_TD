@@ -1,0 +1,35 @@
+﻿@model List<Website_TD.Models.SanPham>
+@{
+    ViewBag.Title = "Limited";
+    Layout = "~/Shared/Layout.cshtml";
+}
+
+@section search
+{
+    <form class="d-flex" id="search" action="/DanhSachSp/@ViewBag.Title">
+        <input class="form-control me-2" type="search" id="search" name="search" placeholder="Search">
+        <button class="btn btn-primary" type="submit">Search</button>
+    </form>
+}
+<div class="container-fluid" style="margin-top:10px">
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            if (item.MaLoaiSP == 7)
+            {
+                <div class="col-sm-6 col-md-4 col-lg-3" style="margin-top:20px">
+                    <div class="card" style="width:350px;">
+                        <img id="khunganh" class="card-img-top" src="@item.HinhAnh" alt="Card image" style="width:100%">
+                        <div class="card-body">
+                            <h4 class="card-title">@item.TenSanPham</h4>
+                            <p class="card-text">@item.Gia VND</p>
+                            <a href="/Admin/Chitiet/@item.MaSanPham" class="btn btn-primary">Xem chi tiết</a>
+                        </div>
+                    </div>
+                </div>
+            }
+
+        }
+    </div>
+</div>
+
